@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Projeto1</string>
+    <string name="app_title">Livros</string>
+    <string name="login_label">Login</string>
+    <string name="username_label">Usuário</string>
+    <string name="password_label">Senha</string>
+    <string name="confirm_login_label">Login</string>
+    <string name="clear_login_label">Limpar</string>
+</resources>
