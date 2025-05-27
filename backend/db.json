@@ -2,15 +2,15 @@
   "users": [
     {
       "id": 1,
-      "nome": "Maria",
+      "username": "Maria",
       "email": "maria@email.com",
-      "senha": "123456"
+      "password": "123456"
     },
     {
       "id": 2,
-      "nome": "Joao",
+      "username": "Joao",
       "email": "joao@email.com",
-      "senha": "senha123"
+      "password": "senha123"
     }
   ],
   "trocas": [
