@@ -9,16 +9,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -28,26 +24,17 @@ import androidx.compose.ui.unit.dp
 import com.example.projeto1.ui.theme.Projeto1Theme
 import androidx.lifecycle.viewmodel.compose.viewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 // viewModel provides functions
-fun LoginScreen(modifier: Modifier = Modifier, viewModel: MainViewModel = viewModel()) {
-//    var name by rememberSaveable { mutableStateOf("") }
-//    var password by rememberSaveable { mutableStateOf("") }
-
-//    val onLoginButtonClicked : () -> Unit = {
-//        Log.i("LoginScreen", "name: $name, password: $password")
-//    }
-//
-//    val onClearButtonClicked : () -> Unit = {
-//        name = ""
-//        password = ""
-//    }
-//
-//    val onCreateAccountButtonClicked : () -> Unit = {
-//        Log.i("LoginScreen", "Create Account Clicked")
-//    }
-
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    viewModel: MainViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    onSuccessfulLogin : () -> Unit = {},
+    navigateUp : () -> Unit = {},)
+{
+    LaunchedEffect(Unit){
+        viewModel.useSavedLogin()
+    }
     Column(
         modifier = modifier.fillMaxSize().padding(50.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -65,7 +52,7 @@ fun LoginScreen(modifier: Modifier = Modifier, viewModel: MainViewModel = viewMo
             supportingText = {
                 if (viewModel.usernameError) {
                     Text(
-                        text = viewModel.usernameErrorMessage,
+                        text = stringResource(viewModel.usernameErrorID),
                         color = MaterialTheme.colorScheme.error
                     )
                 }
@@ -83,7 +70,7 @@ fun LoginScreen(modifier: Modifier = Modifier, viewModel: MainViewModel = viewMo
             supportingText = {
                 if (viewModel.passwordError) {
                     Text(
-                        text = viewModel.passwordErrorMessage,
+                        text = stringResource(viewModel.passwordErrorID),
                         color = MaterialTheme.colorScheme.error
                     )
                 }
@@ -100,10 +87,10 @@ fun LoginScreen(modifier: Modifier = Modifier, viewModel: MainViewModel = viewMo
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Button(onClick = viewModel::performLogin) {
+            Button(onClick = viewModel::clearLogin) {
                 Text(stringResource(R.string.clear_login_label))
             }
-            Button(onClick = viewModel::clearLogin) {
+            Button(onClick = viewModel::performLogin) {
                 Text(stringResource(R.string.confirm_login_label))
             }
         }
@@ -111,6 +98,14 @@ fun LoginScreen(modifier: Modifier = Modifier, viewModel: MainViewModel = viewMo
         OutlinedButton(onClick = viewModel::createAccount) {
             Text(stringResource(R.string.create_account_label))
         }
+
+
+
+        if (viewModel.isLoginSuccessful) {
+            onSuccessfulLogin()
+            Log.i("LoginScreen", "onSuccessfulLogin()")
+        }
+
     }
 }
 
