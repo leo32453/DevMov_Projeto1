@@ -11,4 +11,8 @@
     <string name="error_wrong_username">Invalid username</string>
     <string name="error_wrong_password">Wrong password</string>
     <string name="error">Error</string>
+    <string name="explore_trades">Explore exchanges</string>
+    <string name="search_label">Search Book</string>
+    <string name="button_search_label">Search</string>
+    <string name="error_wrong_username_or_password">Incorrect username or password</string>
 </resources>

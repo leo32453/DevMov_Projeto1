@@ -2,15 +2,44 @@
   "users": [
     {
       "id": 1,
-      "nome": "Maria",
+      "username": "Maria",
       "email": "maria@email.com",
-      "senha": "123456"
+      "password": "123456"
     },
     {
       "id": 2,
-      "nome": "Joao",
+      "username": "Joao",
       "email": "joao@email.com",
-      "senha": "senha123"
+      "password": "senha123"
+    }
+  ],
+  "trocas": [
+    {
+      "exchange_id": 1,
+      "solicitor_id": 1,
+      "book_name": "Senhor dos aneis",
+      "book_state": "Conservado",
+      "searching_for": "Fantasia, Ficção científica",
+      "sugested": "O Caminho dos Reis, O nome do vento",
+      "offerings": [
+        {
+          "userId": 2,
+          "book": "O caminho dos reis"
+        }
+      ]
+    },
+    {
+      "exchange_id": 2,
+      "book_name": "Sandman Volume 1",
+      "book_state": "Seminovo",
+      "searching_for": "Romance, Terror",
+      "sugested": "It: A coisa",
+      "offerings": [
+        {
+          "userId": 1,
+          "book": "O iluminado"
+        }
+      ]
     }
   ]
 }

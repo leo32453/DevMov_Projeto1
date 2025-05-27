@@ -1,16 +1,23 @@
 package com.example.projeto1.repository
 
-import kotlinx.coroutines.delay
+import com.example.projeto1.repository.retrofit.LoginApiInterface
+import com.example.projeto1.repository.retrofit.RetrofitInstance
 
-class UserRepository {
-    suspend fun login(username : String, password : String) : String {
-        delay(2000)
+class UserRepository(val useTestUrl: Boolean = false) {
 
-        return when {
-            !listOf("user1", "user2").contains(username) -> "wrong_username"
-            username == "user1" && password != "123" -> "wrong_password"
-            username == "user1" && password == "123" -> "success"
-            else -> "failed_connection"
+    private val client: LoginApiInterface = if (useTestUrl) RetrofitInstance.testapi else RetrofitInstance.api
+
+    suspend fun login(email: String, password: String): Pair<String, Int> {
+        return try {
+            val users = client.login(email, password)
+            if (users.isNotEmpty()) {
+                "success" to users[0].id
+            } else {
+                "wrong_username_or_password" to -1
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "failed_connection" to -1
         }
     }
 }

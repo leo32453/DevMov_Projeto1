@@ -7,4 +7,8 @@
     <string name="password_label">Senha</string>
     <string name="confirm_login_label">Login</string>
     <string name="clear_login_label">Limpar</string>
+    <string name="explore_trades">Explorar trocas</string>
+    <string name="search_label">Buscar livro</string>
+    <string name="button_search_label">Buscar</string>
+    <string name="error_wrong_username_or_password">Email ou senha incorretos</string>
 </resources>
