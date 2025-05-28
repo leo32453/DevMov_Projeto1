@@ -19,23 +19,6 @@ import com.example.projeto1.ui.theme.Projeto1Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-//fun App() {
-//    Scaffold(
-//        topBar = {
-//            TopAppBar(
-//                title = { Text(stringResource(R.string.app_title)) },
-//                colors = TopAppBarDefaults.mediumTopAppBarColors(
-//                    containerColor = MaterialTheme.colorScheme.primaryContainer
-//                )
-//            )
-//        },
-//        modifier = Modifier.fillMaxSize()
-//    ) { innerPadding ->
-//        LoginScreen(
-//            modifier = Modifier.padding(innerPadding)
-//        )
-//    }
-//}
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 fun App(
     navController : NavHostController = rememberNavController(),

@@ -23,7 +23,8 @@ import com.example.projeto1.ui.viewmodel.TrocasViewModelFactory
 fun TradesScreen(
     application: Application,
     repository: TrocasRepository,
-    onLogout: () -> Unit = {}
+    onLogout: () -> Unit = {},
+    onTrocaClick: (Int) -> Unit
 ) {
     val viewModel: TrocasViewModel = viewModel(
         factory = TrocasViewModelFactory(application, repository)
@@ -85,7 +86,7 @@ fun TradesScreen(
                 }
             } else {
                 filteredTrocas.forEach { troca ->
-                    TrocaCard(troca = troca)
+                    TrocaCard(troca = troca, onClick = { onTrocaClick(troca.exchange_id) })
                     Spacer(modifier = Modifier.height(8.dp))
                 }
             }

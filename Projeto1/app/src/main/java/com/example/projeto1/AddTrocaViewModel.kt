@@ -8,7 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.projeto1.repository.TrocasRepository
 import com.example.projeto1.repository.retrofit.ExchangeData
 import com.example.projeto1.repository.room.AppDatabase
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
@@ -19,11 +21,10 @@ class AddTrocaViewModel(
 
     private val savedLoginDao = AppDatabase.getDatabase(application).savedLoginDao()
 
-    // Estado do formulário
     var bookName = mutableStateOf("")
         private set
 
-    var bookState = mutableStateOf("Novo")
+    var bookState = mutableStateOf(getApplication<Application>().getString(R.string.state_new))
         private set
 
     var suggestions = mutableStateOf("")
@@ -32,16 +33,32 @@ class AddTrocaViewModel(
     var onlySuggestions = mutableStateOf(true)
         private set
 
-    private val categories = listOf("Fantasia", "Ficção científica", "Mistério", "Romance", "Terror", "Não ficção")
+    internal val categories = listOf(
+        getApplication<Application>().getString(R.string.category_fantasy),
+        getApplication<Application>().getString(R.string.category_scifi),
+        getApplication<Application>().getString(R.string.category_mystery),
+        getApplication<Application>().getString(R.string.category_romance),
+        getApplication<Application>().getString(R.string.category_horror),
+        getApplication<Application>().getString(R.string.category_nonfiction)
+    )
     val selectedCategories = mutableStateMapOf<String, Boolean>().apply {
         categories.forEach { put(it, false) }
     }
 
-    // Status do envio
-    private val _status = MutableStateFlow<String?>(null)
-    val status: StateFlow<String?> = _status
+    val bookStates = listOf(
+        getApplication<Application>().getString(R.string.state_new),
+        getApplication<Application>().getString(R.string.state_used),
+        getApplication<Application>().getString(R.string.state_good),
+        getApplication<Application>().getString(R.string.state_damaged)
+    )
 
-    // Manipuladores
+    private val _eventFlow = MutableSharedFlow<String>()
+    val eventFlow: SharedFlow<String> = _eventFlow
+
+    private val _uiStatusMessage = MutableStateFlow<String?>(null)
+    val uiStatusMessage: StateFlow<String?> = _uiStatusMessage
+
+
     fun onBookNameChange(newName: String) {
         bookName.value = newName
     }
@@ -63,24 +80,27 @@ class AddTrocaViewModel(
     }
 
     fun adicionarTroca() {
-        // Validação dos campos obrigatórios
-        if (bookName.value.isBlank()) {
-            _status.value = "O nome do livro é obrigatório."
-            return
-        }
-
-        if (bookState.value.isBlank()) {
-            _status.value = "O estado do livro é obrigatório."
-            return
-        }
-
-
         viewModelScope.launch {
+            if (bookName.value.isBlank()) {
+                _eventFlow.emit(getApplication<Application>().getString(R.string.validation_book_name_required))
+                _uiStatusMessage.value = getApplication<Application>().getString(R.string.validation_book_name_required)
+                return@launch
+            }
+
+            if (bookState.value.isBlank()) {
+                _eventFlow.emit(getApplication<Application>().getString(R.string.validation_book_state_required))
+                _uiStatusMessage.value = getApplication<Application>().getString(R.string.validation_book_state_required)
+                return@launch
+            }
+
             try {
                 val trocas = repository.getTrocas()
                 val newId = (trocas.maxOfOrNull { it.exchange_id } ?: 0) + 1
-                val userId = savedLoginDao.getUserId() ?: run {
-                    _status.value = "Erro: Usuário não encontrado."
+
+                val userId = savedLoginDao.getUserId()
+                if (userId == null) {
+                    _eventFlow.emit(getApplication<Application>().getString(R.string.error_user_not_found_add_troca))
+                    _uiStatusMessage.value = getApplication<Application>().getString(R.string.error_user_not_found_add_troca)
                     return@launch
                 }
 
@@ -91,6 +111,7 @@ class AddTrocaViewModel(
                 }
 
                 val novaTroca = ExchangeData(
+                    id = null,
                     exchange_id = newId,
                     solicitor_id = userId.toInt(),
                     book_name = bookName.value,
@@ -101,13 +122,19 @@ class AddTrocaViewModel(
                 )
 
                 repository.postTroca(novaTroca)
-                _status.value = "Sucesso"
+                _eventFlow.emit(getApplication<Application>().getString(R.string.success_add_trade))
+                _uiStatusMessage.value = getApplication<Application>().getString(R.string.success_add_trade)
+
+                bookName.value = ""
+                bookState.value = getApplication<Application>().getString(R.string.state_new)
+                suggestions.value = ""
+                onlySuggestions.value = true
+                categories.forEach { selectedCategories[it] = false }
             } catch (e: Exception) {
                 e.printStackTrace()
-                _status.value = "Erro: ${e.localizedMessage}"
+                _eventFlow.emit(getApplication<Application>().getString(R.string.add_troca_error_status, e.localizedMessage))
+                _uiStatusMessage.value = getApplication<Application>().getString(R.string.add_troca_error_status, e.localizedMessage)
             }
         }
     }
 }
-
-

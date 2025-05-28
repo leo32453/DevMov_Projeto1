@@ -1,43 +1,44 @@
 package com.example.projeto1.navigation
 
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.SwapHoriz
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.material.icons.filled.*
+import com.example.projeto1.R
 
 sealed class Destination(
     val route: String,
-    val label: String,
+    @StringRes val labelResId: Int,
     val icon: ImageVector
 ) {
     object Login : Destination(
         route = "login",
-        label = "Login",
+        labelResId = R.string.nav_label_login,
         icon = Icons.Default.Lock
     )
 
     object Explore : Destination(
         route = "explore",
-        label = "Explorar",
+        labelResId = R.string.nav_label_explore,
         icon = Icons.Default.Explore
     )
 
     object MyExchanges : Destination(
         route = "my_exchanges",
-        label = "Minhas Trocas",
+        labelResId = R.string.nav_label_my_exchanges,
         icon = Icons.Default.SwapHoriz
     )
 
     object Add : Destination(
         route = "add",
-        label = "Adicionar",
+        labelResId = R.string.nav_label_add,
         icon = Icons.Default.Add
     )
 
     companion object {
-        // Lista apenas dos destinos que aparecem na BottomBar
         val bottomBarDestinations = listOf(Explore, MyExchanges, Add)
     }
 }

@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Projeto1</string>
-    <string name="app_title">Livros</string>
+    <string name="app_name">BookTrade</string>
+    <string name="app_title">Books</string>
     <string name="login_label">Login</string>
-    <string name="username_label">Usuário</string>
+    <string name="username_label">Email</string>
     <string name="password_label">Senha</string>
     <string name="confirm_login_label">Login</string>
     <string name="clear_login_label">Limpar</string>
+    <string name="create_account_label">Criar conta</string>
+    <string name="error_empty_field">Este campo deve ser preenchido</string>
+    <string name="error_wrong_username">Nome de usuário inválido</string>
+    <string name="error_wrong_password">Senha incorreta</string>
+    <string name="error">Erro</string>
     <string name="explore_trades">Explorar trocas</string>
-    <string name="search_label">Buscar livro</string>
+    <string name="search_label">Buscar Livro</string>
     <string name="button_search_label">Buscar</string>
-    <string name="error_wrong_username_or_password">Email ou senha incorretos</string>
+    <string name="error_wrong_username_or_password">Nome de usuário ou senha incorretos</string>
+
+    <string name="screen_title_add_trade">Cadastrar troca</string>
+    <string name="label_book_name">Nome do livro (obrigatório)</string>
+    <string name="label_book_state">Estado do livro (obrigatório)</string>
+    <string name="state_new">Novo</string>
+    <string name="state_used">Seminovo</string>
+    <string name="state_good">Conservado</string>
+    <string name="state_damaged">Danificado</string>
+    <string name="label_searching">Buscando</string>
+    <string name="only_suggestions">Apenas as sugestões de troca</string>
+    <string name="category_fantasy">Fantasia</string>
+    <string name="category_scifi">Ficção científica</string>
+    <string name="category_mystery">Mistério</string>
+
+    <string name="category_horror">Terror</string>
+    <string name="category_nonfiction">Não ficção</string>
+    <string name="label_suggestions">Sugestões de troca</string>
+    <string name="button_submit_trade">Cadastrar</string>
+    <string name="success_add_trade">Troca cadastrada com sucesso!</string>
+    <string name="validation_book_name_required">O nome do livro é obrigatório.</string>
+    <string name="validation_book_state_required">O estado do livro é obrigatório.</string>
+    <string name="error_user_not_found_add_troca">Erro: Usuário não encontrado.</string>
+    <string name="add_troca_error_status">Erro: %1$s</string>
+
+    <string name="label_livro">Livro: %1$s</string>
+    <string name="label_estado">Estado: %1$s</string>
+    <string name="label_buscando">Buscando: %1$s</string>
+
+    <string name="trade_detail">Detalhes da troca</string>
+    <string name="voltar">Voltar</string>
+    <string name="livro">Livro: %s</string>
+    <string name="estado">Estado: %s</string>
+    <string name="buscando">Buscando: %s</string>
+    <string name="sugestoes">Sugestões: %s</string>
+    <string name="erro_carregamento">Erro ao carregar os detalhes da troca</string>
+    <string name="sua_oferta">Sua oferta</string>
+    <string name="nome_livro">Nome do livro</string>
+    <string name="estado_livro">Estado do livro</string>
+    <string name="solicitar">Solicitar</string>
+    <string name="error_trade_not_found">Troca não encontrada.</string>
+    <string name="error_loading_details">Erro ao carregar detalhes: %1$s</string>
+    <string name="error_trade_details_not_loaded">Erro: Detalhes da troca não carregados.</string>
+    <string name="error_offer_book_name_required">O nome do livro da oferta é obrigatório.</string>
+    <string name="error_user_not_found">Erro: Usuário não encontrado.</string>
+    <string name="offer_sent_successfully">Oferta enviada com sucesso!</string>
+    <string name="error_sending_offer">Erro ao enviar oferta: %1$s</string>
+
+    <string name="book_state_default">Novo</string>
+    <string name="book_state_novo">Novo</string>
+    <string name="book_state_seminovo">Seminovo</string>
+    <string name="book_state_conservado">Conservado</string>
+    <string name="book_state_danificado">Danificado</string>
+    <string name="category_fantasia">Fantasia</string>
+    <string name="category_ficcao_cientifica">Ficção científica</string>
+    <string name="category_misterio">Mistério</string>
+    <string name="category_romance">Romance</string>
+    <string name="category_terror">Terror</string>
+    <string name="category_nao_ficcao">Não ficção</string>
+
+    <string name="nav_label_login">Login</string>
+    <string name="nav_label_explore">Explorar</string>
+    <string name="nav_label_my_exchanges">Minhas Trocas</string>
+    <string name="nav_label_add">Adicionar</string>
 </resources>

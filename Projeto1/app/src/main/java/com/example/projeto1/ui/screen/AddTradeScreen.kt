@@ -17,30 +17,29 @@ import com.example.projeto1.repository.TrocasRepository
 import com.example.projeto1.ui.viewmodel.AddTrocaViewModelFactory
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTradeScreen(
     application: Application,
-    onSuccess: () -> Unit = {},
-    viewModel: AddTrocaViewModel = viewModel(
+    onSuccess: () -> Unit = {}
+) {
+    val context = LocalContext.current
+
+    val viewModel: AddTrocaViewModel = viewModel(
         factory = AddTrocaViewModelFactory(
-            application,
+            application = application,
             repository = TrocasRepository()
         )
     )
-){
-    val context = LocalContext.current
-    val status by viewModel.status.collectAsState()
 
-    val strings = LocalContext.current.resources
-
-    LaunchedEffect(status) {
-        if (status == "Sucesso") {
-            Toast.makeText(context, context.getString(R.string.success_add_trade), Toast.LENGTH_SHORT).show()
-            onSuccess()
-        } else if (status?.startsWith("Erro") == true) {
-            Toast.makeText(context, status, Toast.LENGTH_LONG).show()
+    LaunchedEffect(key1 = Unit) {
+        viewModel.eventFlow.collectLatest { message ->
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+            if (message == context.getString(R.string.success_add_trade)) {
+                onSuccess()
+            }
         }
     }
 
@@ -72,13 +71,7 @@ fun AddTradeScreen(
             )
 
             Text(stringResource(R.string.label_book_state), style = MaterialTheme.typography.titleMedium)
-            listOf(
-                R.string.state_new,
-                R.string.state_used,
-                R.string.state_good,
-                R.string.state_damaged
-            ).forEach {
-                val label = stringResource(id = it)
+            viewModel.bookStates.forEach { label ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     RadioButton(
                         selected = viewModel.bookState.value == label,
@@ -98,17 +91,7 @@ fun AddTradeScreen(
             }
 
             if (!viewModel.onlySuggestions.value) {
-                val categories = listOf(
-                    R.string.category_fantasy,
-                    R.string.category_scifi,
-                    R.string.category_mystery,
-                    R.string.category_romance,
-                    R.string.category_horror,
-                    R.string.category_nonfiction
-                )
-
-                categories.forEach {
-                    val label = stringResource(id = it)
+                viewModel.categories.forEach { label ->
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Checkbox(
                             checked = viewModel.selectedCategories[label] == true,
@@ -128,11 +111,12 @@ fun AddTradeScreen(
 
             Button(
                 onClick = viewModel::adicionarTroca,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .wrapContentSize()
+                    .align(Alignment.CenterHorizontally)
             ) {
                 Text(stringResource(R.string.button_submit_trade))
             }
         }
     }
 }
-

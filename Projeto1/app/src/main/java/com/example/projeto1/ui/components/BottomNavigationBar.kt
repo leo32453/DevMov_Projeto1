@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.example.projeto1.navigation.Destination
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun BottomNavBar(
@@ -28,8 +29,8 @@ fun BottomNavBar(
                         }
                     }
                 },
-                icon = { Icon(destination.icon, contentDescription = destination.label) },
-                label = { Text(destination.label) }
+                icon = { Icon(destination.icon, contentDescription = stringResource(id = destination.labelResId)) },
+                label = { Text(stringResource(id = destination.labelResId)) }
             )
         }
     }

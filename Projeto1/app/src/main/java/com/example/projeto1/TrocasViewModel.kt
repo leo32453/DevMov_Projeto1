@@ -33,7 +33,7 @@ class TrocasViewModel(
         viewModelScope.launch {
             try {
                 val todasTrocas = repository.getTrocas()
-                val userId = savedLoginDao.getUserId() // Corrigido aqui
+                val userId = savedLoginDao.getUserId()
 
                 trocas = if (userId != null) {
                     todasTrocas.filter { it.solicitor_id.toLong() != userId }
