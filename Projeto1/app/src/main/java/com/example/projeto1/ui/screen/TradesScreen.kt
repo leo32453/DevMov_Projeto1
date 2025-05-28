@@ -1,46 +1,41 @@
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.LaunchedEffect
+package com.example.projeto1.ui.screens
+
+import TrocasViewModel
+import android.app.Application
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.projeto1.ui.components.TrocaCard
 import com.example.projeto1.R
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.ui.Alignment
+import com.example.projeto1.repository.TrocasRepository
+import com.example.projeto1.ui.components.TrocaCard
+import com.example.projeto1.ui.viewmodel.TrocasViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(
-    viewModel: TrocasViewModel = viewModel(),
-    onLogout: () -> Unit = {}
+fun TradesScreen(
+    application: Application,
+    repository: TrocasRepository,
+    onLogout: () -> Unit = {},
+    onTrocaClick: (Int) -> Unit
 ) {
+    val viewModel: TrocasViewModel = viewModel(
+        factory = TrocasViewModelFactory(application, repository)
+    )
+
     val trocas = viewModel.trocas
     val isLoading = viewModel.isLoading
 
     var searchQuery by remember { mutableStateOf("") }
     var filteredTrocas by remember { mutableStateOf(trocas) }
 
-    // Atualiza filteredTrocas sempre que trocas ou searchQuery mudarem
     LaunchedEffect(trocas, searchQuery) {
         filteredTrocas = if (searchQuery.isBlank()) {
             trocas
@@ -51,7 +46,7 @@ fun MainScreen(
         }
     }
 
-    Scaffold (
+    Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(R.string.explore_trades)) },
@@ -61,18 +56,17 @@ fun MainScreen(
             )
         },
         modifier = Modifier.fillMaxSize()
-    ){ innerPadding ->
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
                 .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
         ) {
-
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
-
             ) {
                 OutlinedTextField(
                     value = searchQuery,
@@ -87,11 +81,13 @@ fun MainScreen(
             Spacer(modifier = Modifier.padding(8.dp))
 
             if (isLoading) {
-                CircularProgressIndicator()
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
             } else {
                 filteredTrocas.forEach { troca ->
-                    TrocaCard(troca = troca)
-                    Spacer(modifier = Modifier.padding(0.dp))
+                    TrocaCard(troca = troca, onClick = { onTrocaClick(troca.exchange_id) })
+                    Spacer(modifier = Modifier.height(8.dp))
                 }
             }
         }

@@ -1,13 +1,13 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "Maria",
       "email": "maria@email.com",
       "password": "123456"
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "Joao",
       "email": "joao@email.com",
       "password": "senha123"
@@ -26,20 +26,83 @@
           "userId": 2,
           "book": "O caminho dos reis"
         }
-      ]
+      ],
+      "id": "9e87"
     },
     {
       "exchange_id": 2,
+      "solicitor_id": 2,
       "book_name": "Sandman Volume 1",
       "book_state": "Seminovo",
       "searching_for": "Romance, Terror",
       "sugested": "It: A coisa",
       "offerings": [
         {
-          "userId": 1,
-          "book": "O iluminado"
+          "book": "O iluminado",
+          "userId": 1
+        },
+        {
+          "book": "Teste ",
+          "book_state": "Conservado",
+          "userId": 1
+        },
+        {
+          "book": "Teste 2",
+          "book_state": "Novo",
+          "userId": 1
         }
-      ]
+      ],
+      "id": "f1b3"
+    },
+    {
+      "id": "26e9",
+      "book_name": "Teste ",
+      "book_state": "Teste",
+      "exchange_id": 3,
+      "offerings": [],
+      "searching_for": "Teste",
+      "solicitor_id": 2,
+      "sugested": "Teste"
+    },
+    {
+      "id": "e187",
+      "book_name": "Testando final",
+      "book_state": "Seminovo",
+      "exchange_id": 4,
+      "offerings": [],
+      "searching_for": "Mistério, Ficção científica",
+      "solicitor_id": 1,
+      "sugested": "Duna"
+    },
+    {
+      "id": "f18b",
+      "book_name": "Skyward",
+      "book_state": "Novo",
+      "exchange_id": 5,
+      "offerings": [],
+      "searching_for": "Fantasia, Terror",
+      "solicitor_id": 1,
+      "sugested": "Gideon, a nona"
+    },
+    {
+      "id": "35a5",
+      "book_name": "Vinland Saga",
+      "book_state": "Seminovo",
+      "exchange_id": 6,
+      "offerings": [],
+      "searching_for": "Fantasia, Ficção científica",
+      "solicitor_id": 1,
+      "sugested": "Berserk"
+    },
+    {
+      "id": "a36a",
+      "book_name": "Fogo e Sangue",
+      "book_state": "Conservado",
+      "exchange_id": 7,
+      "offerings": [],
+      "searching_for": "Mistério, Romance",
+      "solicitor_id": 1,
+      "sugested": "A culpa e das estrelas"
     }
   ]
 }

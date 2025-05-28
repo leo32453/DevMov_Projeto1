@@ -3,14 +3,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import com.example.projeto1.repository.TrocasRepository
 import com.example.projeto1.repository.retrofit.ExchangeData
+import com.example.projeto1.repository.room.AppDatabase
 import kotlinx.coroutines.launch
 
 class TrocasViewModel(
-    private val repository: TrocasRepository = TrocasRepository()
-) : ViewModel() {
-    
+    application: Application,
+    private val repository: TrocasRepository
+) : AndroidViewModel(application) {
+
+    private val savedLoginDao by lazy {
+        AppDatabase.getDatabase(application).savedLoginDao()
+    }
+
     var trocas by mutableStateOf<List<ExchangeData>>(emptyList())
         private set
 
@@ -24,8 +32,16 @@ class TrocasViewModel(
     private fun fetchTrocas() {
         viewModelScope.launch {
             try {
-                trocas = repository.getTrocas()
+                val todasTrocas = repository.getTrocas()
+                val userId = savedLoginDao.getUserId()
+
+                trocas = if (userId != null) {
+                    todasTrocas.filter { it.solicitor_id.toLong() != userId }
+                } else {
+                    todasTrocas
+                }
             } catch (e: Exception) {
+                trocas = emptyList()
                 e.printStackTrace()
             } finally {
                 isLoading = false
