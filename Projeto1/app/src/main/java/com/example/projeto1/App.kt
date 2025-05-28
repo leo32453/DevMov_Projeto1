@@ -1,6 +1,5 @@
 package com.example.projeto1
 
-import MainScreen
 import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -14,6 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.projeto1.ui.screen.LoginScreen
+import com.example.projeto1.ui.screens.TradesScreen
 import kotlinx.coroutines.launch
 import com.example.projeto1.ui.theme.Projeto1Theme
 
@@ -69,15 +69,9 @@ fun App(
                 )
             }
             composable("main") {
-                MainScreen(
-                    onLogout = {
-                        navController.navigate("login") {
-                            popUpTo(navController.graph.startDestinationId) {
-                                inclusive = true
-                            }
-                        }
-                    }
-                )
+                //TradesScreen(
+
+                //)
             }
             composable("my_trades") {
 
