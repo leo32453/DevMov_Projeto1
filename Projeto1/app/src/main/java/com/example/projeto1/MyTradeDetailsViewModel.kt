@@ -2,7 +2,6 @@ package com.example.projeto1
 
 import android.app.Application
 import android.util.Log
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -12,10 +11,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.projeto1.repository.TrocasRepository
 import com.example.projeto1.repository.retrofit.ExchangeData
 import com.example.projeto1.repository.room.AppDatabase
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class MyTradeDetailsViewModel(

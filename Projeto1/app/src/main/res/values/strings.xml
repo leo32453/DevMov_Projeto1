@@ -81,4 +81,5 @@
     <string name="my_trades">My trades</string>
     <string name="offers">Offers</string>
     <string name="no_offers_found">No offers found</string>
+    <string name="logout">Logout</string>
 </resources>

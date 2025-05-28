@@ -17,7 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.projeto1.AppViewModelProvider
+import com.example.projeto1.MainViewModel
 import com.example.projeto1.R
+import com.example.projeto1.repository.SavedLoginRepository
 import com.example.projeto1.repository.TrocasRepository
 import com.example.projeto1.ui.components.TrocaCard
 import com.example.projeto1.ui.viewmodel.MinhasTrocasViewModelFactory

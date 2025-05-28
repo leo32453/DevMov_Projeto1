@@ -2,6 +2,7 @@ package com.example.projeto1
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Application
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -12,6 +13,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.projeto1.repository.SavedLoginRepository
+import com.example.projeto1.repository.TrocasRepository
+import com.example.projeto1.repository.room.AppDatabase
 import com.example.projeto1.ui.screen.LoginScreen
 import com.example.projeto1.ui.screens.TradesScreen
 import kotlinx.coroutines.launch
@@ -35,6 +39,7 @@ fun App(
             startDestination = startingRoute
         ) {
             composable("login") {
+
                 LoginScreen(
                     onSuccessfulLogin = {
                         // here
@@ -51,8 +56,32 @@ fun App(
                     },
                 )
             }
-            composable("main") {
-
+            composable("trades") {
+                val application = LocalContext.current.applicationContext as Application
+                val repository = TrocasRepository()
+                val savedLoginRepository = SavedLoginRepository(
+                    AppDatabase.getDatabase(application).savedLoginDao()
+                )
+                TradesScreen(
+                    navigateUp = {
+                        scope.launch {
+                            activity?.finish()
+                        }
+                    },
+                    onLogout = {
+                        navController.navigate("login") {
+                            popUpTo(navController.graph.startDestinationId) {
+                                inclusive = true
+                            }
+                        }
+                    },
+                    application = application,
+                    repository = repository,
+                    savedLoginRepository = savedLoginRepository,
+                    onTrocaClick = { exchangeId ->
+                        navController.navigate("trade_details/$exchangeId")
+                    }
+                )
             }
             composable("my_trades") {
 
