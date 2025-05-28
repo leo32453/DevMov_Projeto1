@@ -52,8 +52,8 @@ fun AppNavHost(
                     navController.navigate("trade_details/$exchangeId")
                 },
                 onLogout = {
-                    navController.navigate("login") {
-                        popUpTo(navController.graph.startDestinationId) {
+                    navController.navigate(Destination.Login.route) {
+                        popUpTo(navController.graph.id) {
                             inclusive = true
                         }
                     }
