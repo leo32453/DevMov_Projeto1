@@ -14,21 +14,36 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.projeto1.R
+import com.example.projeto1.repository.SavedLoginRepository
 import com.example.projeto1.repository.TrocasRepository
 import com.example.projeto1.ui.components.TrocaCard
 import com.example.projeto1.ui.viewmodel.TrocasViewModelFactory
+import kotlinx.coroutines.launch
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Logout
+import kotlinx.coroutines.Job
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TradesScreen(
     application: Application,
     repository: TrocasRepository,
+    savedLoginRepository: SavedLoginRepository,
     onLogout: () -> Unit = {},
-    onTrocaClick: (Int) -> Unit
+    onTrocaClick: (Int) -> Unit,
+    navigateUp: () -> Job
 ) {
     val viewModel: TrocasViewModel = viewModel(
-        factory = TrocasViewModelFactory(application, repository)
+        factory = TrocasViewModelFactory(application, repository,savedLoginRepository)
     )
+
+    val coroutineScope = rememberCoroutineScope()
+    val logout_aux: () -> Unit = {
+        coroutineScope.launch {
+            viewModel.logout()
+            onLogout()
+        }
+    }
 
     val trocas = viewModel.trocas
     val isLoading = viewModel.isLoading
@@ -52,7 +67,15 @@ fun TradesScreen(
                 title = { Text(stringResource(R.string.explore_trades)) },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                ),
+                actions = {
+                    IconButton(onClick = logout_aux) {
+                        Icon(
+                            imageVector = Icons.Default.Logout,
+                            contentDescription = stringResource(R.string.logout)
+                        )
+                    }
+                }
             )
         },
         modifier = Modifier.fillMaxSize()

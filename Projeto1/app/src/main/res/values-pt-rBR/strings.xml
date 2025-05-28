@@ -82,4 +82,5 @@
     <string name="my_trades">Minhas trocas</string>
     <string name="offers">Ofertas</string>
     <string name="no_offers_found">Nenhuma oferta encontrada</string>
+    <string name="logout">Logout</string>
 </resources>

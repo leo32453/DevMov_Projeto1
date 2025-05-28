@@ -1,7 +1,6 @@
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import android.app.Application
 import android.util.Log
@@ -13,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class MinhasTrocasViewModel(
     application: Application,
-    private val repository: TrocasRepository
+    private val repository: TrocasRepository,
 ) : AndroidViewModel(application) {
 
     private val savedLoginDao by lazy {

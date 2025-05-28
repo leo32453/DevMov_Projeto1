@@ -146,6 +146,11 @@
           "userId": 999,
           "book": "Livro Novo",
           "book_state": "Usado"
+        },
+        {
+          "userId": 999,
+          "book": "Livro Novo",
+          "book_state": "Usado"
         }
       ]
     },
@@ -201,6 +206,26 @@
     },
     {
       "id": "d3be",
+      "exchange_id": 10000,
+      "solicitor_id": 1,
+      "book_name": "Livro 1",
+      "book_state": "Conservado",
+      "searching_for": "Fantasia",
+      "sugested": "Livro 2",
+      "offerings": []
+    },
+    {
+      "id": "35aa",
+      "exchange_id": 3525,
+      "solicitor_id": 1,
+      "book_name": "Livro 1",
+      "book_state": "Conservado",
+      "searching_for": "Fantasia",
+      "sugested": "Livro 2",
+      "offerings": []
+    },
+    {
+      "id": "0bfe",
       "exchange_id": 10000,
       "solicitor_id": 1,
       "book_name": "Livro 1",
