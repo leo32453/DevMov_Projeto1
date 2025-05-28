@@ -1,4 +1,4 @@
-package com.example.projeto1
+package com.example.projeto1.ui.screen
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -28,15 +28,41 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.projeto1.ui.theme.Projeto1Theme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.example.projeto1.AppViewModelProvider
+import com.example.projeto1.MainViewModel
+import com.example.projeto1.R
+import com.example.projeto1.navigation.Destination
 
+@Composable
+fun LoginScreenWithNavigation(
+    navController: NavController,
+    modifier: Modifier = Modifier,
+    viewModel: MainViewModel = viewModel(factory = AppViewModelProvider.Factory)
+) {
+    // Implementação do corpo da função
+    LoginScreen(
+        modifier = modifier,
+        viewModel = viewModel,
+        onSuccessfulLogin = {
+            // Navega para a tela principal após login bem-sucedido
+            navController.navigate(Destination.Explore.route) {
+                // Limpa a pilha de navegação
+                popUpTo("login") { inclusive = true }
+            }
+        },
+        navigateUp = {
+            // Volta para a tela anterior
+            navController.popBackStack()
+        }
+    )
+}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 // viewModel provides functions
