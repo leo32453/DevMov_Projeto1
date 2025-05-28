@@ -21,4 +21,7 @@ interface SavedLoginDao {
 
     @Query("SELECT id FROM SavedLogin LIMIT 1")
     suspend fun getUserId(): Long?
+
+    @Query("Select * from SavedLogin Limit 1")
+    suspend fun getSaved() : SavedLogin
 }

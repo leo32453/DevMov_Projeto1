@@ -78,4 +78,7 @@
     <string name="nav_label_explore">Explore</string>
     <string name="nav_label_my_exchanges">My Exchanges</string>
     <string name="nav_label_add">Add</string>
+    <string name="my_trades">My trades</string>
+    <string name="offers">Offers</string>
+    <string name="no_offers_found">No offers found</string>
 </resources>

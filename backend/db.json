@@ -24,6 +24,7 @@
       "offerings": [
         {
           "userId": 2,
+          "book_state": "Conservado",
           "book": "O caminho dos reis"
         }
       ],
@@ -39,6 +40,7 @@
       "offerings": [
         {
           "book": "O iluminado",
+          "book_state": "Conservado",
           "userId": 1
         },
         {
