@@ -26,7 +26,7 @@ fun TrocaCard(troca: ExchangeData, onClick: () -> Unit) {
                 color = MaterialTheme.colorScheme.primaryContainer,
                 shape = RoundedCornerShape(16.dp)
             )
-            .clickable { onClick() } // <-- Adicionado aqui para tornar clicável
+            .clickable { onClick() }
             .padding(16.dp)
     ) {
         Text(
