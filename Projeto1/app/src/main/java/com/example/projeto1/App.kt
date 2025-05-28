@@ -52,11 +52,12 @@ fun App(
                 )
             }
             composable("main") {
-                //TradesScreen(
 
-                //)
             }
             composable("my_trades") {
+
+            }
+            composable("my_trade_details") {
 
             }
             composable("register_trade") {

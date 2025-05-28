@@ -12,9 +12,10 @@ import androidx.navigation.navArgument
 import com.example.projeto1.repository.TrocasRepository
 import com.example.projeto1.ui.screen.AddTradeScreen
 import com.example.projeto1.ui.screen.LoginScreenWithNavigation
-import com.example.projeto1.ui.screen.MyTradesScreen
+import com.example.projeto1.ui.screens.MyTradeDetailsScreen
 import com.example.projeto1.ui.screens.TradeDetailsScreen
 import com.example.projeto1.ui.screens.TradesScreen
+import com.example.projeto1.ui.screens.MyTradesScreen
 
 @Composable
 fun AppNavHost(
@@ -44,7 +45,12 @@ fun AppNavHost(
 
         }
         composable(Destination.MyExchanges.route) {
-            MyTradesScreen()
+            MyTradesScreen(
+                application = LocalContext.current.applicationContext as Application,
+                repository = TrocasRepository(),
+                onTrocaClick = { exchangeId ->
+                    navController.navigate("my_trade_details/$exchangeId")
+                })
         }
         composable(Destination.Add.route) {
             val application = LocalContext.current.applicationContext as Application
@@ -63,6 +69,22 @@ fun AppNavHost(
             val exchangeId = backStackEntry.arguments?.getInt("exchangeId") ?: 0
 
             TradeDetailsScreen(
+                exchangeId = exchangeId,
+                repository = repository,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = "my_trade_details/{exchangeId}",
+            arguments = listOf(navArgument("exchangeId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val application = LocalContext.current.applicationContext as Application
+            val repository = TrocasRepository()
+
+            val exchangeId = backStackEntry.arguments?.getInt("exchangeId") ?: 0
+
+            MyTradeDetailsScreen(
                 exchangeId = exchangeId,
                 repository = repository,
                 onBack = { navController.popBackStack() }

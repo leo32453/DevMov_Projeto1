@@ -13,4 +13,6 @@ class SavedLoginRepository(private val dao: SavedLoginDao) {
 
     fun getAll() : Flow<List<SavedLogin>> = dao.getAllInFlow()
 
+    suspend fun getSaved() : SavedLogin = dao.getSaved()
+
 }

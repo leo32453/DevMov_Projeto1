@@ -10,6 +10,14 @@ class TrocasRepository {
         return RetrofitInstance.ExchangeApi.getTrocas()
     }
 
+    suspend fun getMinhasTrocas(solicitor_id : String): List<ExchangeData> {
+        return RetrofitInstance.ExchangeApi.getMinhasTrocas(solicitor_id)
+    }
+
+    suspend fun getTrocaByExchangeId(exchange_id : Int): List<ExchangeData> {
+        return RetrofitInstance.ExchangeApi.getTrocaByExchangeId(exchange_id)
+    }
+
     suspend fun postTroca(troca: ExchangeData) {
         RetrofitInstance.ExchangeApi.postTroca(troca)
     }

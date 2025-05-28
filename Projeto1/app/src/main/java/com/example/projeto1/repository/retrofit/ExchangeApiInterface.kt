@@ -15,6 +15,11 @@ interface ExchangeApiInterface {
     @POST("trocas")
     suspend fun postTroca(@Body troca: ExchangeData)
 
+    @GET("trocas")
+    suspend fun getMinhasTrocas(
+        @Query("solicitor_id") solicitor_id: String,
+    ): List<ExchangeData>
+
     // Adiciona oferta a uma troca existente
     @PATCH("trocas/{id}")
     @JvmSuppressWildcards
