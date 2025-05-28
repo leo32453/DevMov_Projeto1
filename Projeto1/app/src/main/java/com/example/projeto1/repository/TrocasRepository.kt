@@ -7,4 +7,9 @@ class TrocasRepository {
     suspend fun getTrocas(): List<ExchangeData> {
         return RetrofitInstance.ExchangeApi.getTrocas()
     }
+
+    suspend fun postTroca(troca: ExchangeData) {
+        RetrofitInstance.ExchangeApi.postTroca(troca)
+    }
+
 }

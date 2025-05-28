@@ -15,4 +15,24 @@
     <string name="search_label">Search Book</string>
     <string name="button_search_label">Search</string>
     <string name="error_wrong_username_or_password">Incorrect username or password</string>
+
+    <!-- AddTradeScreen -->
+    <string name="screen_title_add_trade">Cadastrar troca</string>
+    <string name="label_book_name">Nome do livro (obrigatório)</string>
+    <string name="label_book_state">Estado do livro (obrigatório)</string>
+    <string name="state_new">Novo</string>
+    <string name="state_used">Seminovo</string>
+    <string name="state_good">Conservado</string>
+    <string name="state_damaged">Danificado</string>
+    <string name="label_searching">Buscando</string>
+    <string name="only_suggestions">Apenas as sugestões de troca</string>
+    <string name="category_fantasy">Fantasia</string>
+    <string name="category_scifi">Ficção científica</string>
+    <string name="category_mystery">Mistério</string>
+    <string name="category_romance">Romance</string>
+    <string name="category_horror">Terror</string>
+    <string name="category_nonfiction">Não ficção</string>
+    <string name="label_suggestions">Sugestões de troca</string>
+    <string name="button_submit_trade">Cadastrar</string>
+    <string name="success_add_trade">Troca cadastrada com sucesso!</string>
 </resources>

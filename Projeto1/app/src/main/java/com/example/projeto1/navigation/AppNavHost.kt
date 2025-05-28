@@ -37,7 +37,10 @@ fun AppNavHost(
             MyTradesScreen()
         }
         composable(Destination.Add.route) {
-            AddTradeScreen()
+            val application = LocalContext.current.applicationContext as Application
+            val repository = TrocasRepository()
+
+            AddTradeScreen(application = application)
         }
     }
 }

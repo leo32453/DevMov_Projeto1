@@ -3,7 +3,9 @@ package com.example.projeto1.ui.screens
 import TrocasViewModel
 import android.app.Application
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -58,6 +60,7 @@ fun TradesScreen(
             modifier = Modifier
                 .padding(innerPadding)
                 .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
         ) {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),

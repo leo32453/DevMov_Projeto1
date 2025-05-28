@@ -1,13 +1,13 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "Maria",
       "email": "maria@email.com",
       "password": "123456"
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "Joao",
       "email": "joao@email.com",
       "password": "senha123"
@@ -26,7 +26,8 @@
           "userId": 2,
           "book": "O caminho dos reis"
         }
-      ]
+      ],
+      "id": "9e87"
     },
     {
       "exchange_id": 2,
@@ -40,7 +41,28 @@
           "userId": 1,
           "book": "O iluminado"
         }
-      ]
+      ],
+      "id": "f1b3"
+    },
+    {
+      "id": "26e9",
+      "book_name": "Teste ",
+      "book_state": "Teste",
+      "exchange_id": 3,
+      "offerings": [],
+      "searching_for": "Teste",
+      "solicitor_id": 2,
+      "sugested": "Teste"
+    },
+    {
+      "id": "e187",
+      "book_name": "Testando final",
+      "book_state": "Seminovo",
+      "exchange_id": 4,
+      "offerings": [],
+      "searching_for": "Mistério, Ficção científica",
+      "solicitor_id": 1,
+      "sugested": "Duna"
     }
   ]
 }
