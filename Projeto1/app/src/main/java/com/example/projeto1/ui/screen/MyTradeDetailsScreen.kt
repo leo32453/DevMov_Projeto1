@@ -38,34 +38,16 @@ import com.example.projeto1.MyTradesViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyTradesScreen(
+fun MyTradeDetailsScreen(
     viewModel: MyTradesViewModel = viewModel(factory = AppViewModelProvider.Factory),
-    onLogout: () -> Unit = {},
-    onDetails: () -> Unit = {}
+    onLogout: () -> Unit = {}
 ) {
     val context = LocalContext.current
-
-    val trocas = viewModel.trocas
-    val isLoading = viewModel.isLoading
-
-    var searchQuery by remember { mutableStateOf("") }
-    var filteredTrocas by remember { mutableStateOf(trocas) }
-
-    // Atualiza filteredTrocas sempre que trocas ou searchQuery mudarem
-    LaunchedEffect(trocas, searchQuery) {
-        filteredTrocas = if (searchQuery.isBlank()) {
-            trocas
-        } else {
-            trocas.filter { troca ->
-                troca.book_name.contains(searchQuery, ignoreCase = true)
-            }
-        }
-    }
 
     Scaffold (
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.my_trades)) },
+                title = { Text(stringResource(R.string.exchange_details)) },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
                 )
@@ -78,39 +60,7 @@ fun MyTradesScreen(
                 .padding(innerPadding)
                 .padding(16.dp)
         ) {
-
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-
-            ) {
-                OutlinedTextField(
-                    value = searchQuery,
-                    onValueChange = { searchQuery = it },
-                    label = { Text(stringResource(id = R.string.search_label)) },
-                    modifier = Modifier.weight(1f),
-                    shape = RoundedCornerShape(50.dp),
-                    singleLine = true
-                )
-            }
-
-            Spacer(modifier = Modifier.padding(8.dp))
-
-            if (isLoading) {
-                CircularProgressIndicator()
-            } else {
-                LazyColumn {
-                    itemsIndexed(filteredTrocas) { index, troca ->
-                        Row (modifier = Modifier
-                            .clickable (onClick = { onDetails() })
-                        ){
-                            TrocaCard(troca = troca)
-                            Spacer(modifier = Modifier.padding(0.dp))
-                        }
-                    }
-                }
-            }
+            Text("Details")
         }
     }
 }

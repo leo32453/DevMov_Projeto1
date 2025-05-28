@@ -15,6 +15,12 @@ object AppViewModelProvider {
         initializer {
             MainViewModel(appApplication().container.savedLoginRepository)
         }
+        initializer {
+            MyTradesViewModel(
+                appApplication().container.trocasRepository,
+                appApplication().container.savedLoginRepository
+            )
+        }
 
     }
 }

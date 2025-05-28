@@ -15,4 +15,6 @@
     <string name="search_label">Search Book</string>
     <string name="button_search_label">Search</string>
     <string name="error_wrong_username_or_password">Incorrect username or password</string>
+    <string name="my_trades">My exchanges</string>
+    <string name="exchange_details">Trade details</string>
 </resources>

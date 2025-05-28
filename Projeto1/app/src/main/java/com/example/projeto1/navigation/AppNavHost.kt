@@ -1,6 +1,7 @@
 package com.example.projeto1.navigation
 
 import MainScreen
+import MyTradesScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController

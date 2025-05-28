@@ -1,6 +1,8 @@
 package com.example.projeto1
 
 import MainScreen
+import MyTradeDetailsScreen
+import MyTradesScreen
 import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -80,7 +82,15 @@ fun App(
                 )
             }
             composable("my_trades") {
-
+                MyTradesScreen(
+                    onDetails = {
+                        navController.navigate("my_trade_details") {
+                            popUpTo(navController.graph.startDestinationId) {
+                                inclusive = true
+                            }
+                        }
+                    }
+                )
             }
             composable("register_trade") {
 
@@ -90,6 +100,9 @@ fun App(
             }
             composable("respond_trade") {
 
+            }
+            composable("my_trade_details") {
+                MyTradeDetailsScreen()
             }
 
         }

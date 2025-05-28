@@ -16,4 +16,7 @@ interface SavedLoginDao {
     @Query("Select * from SavedLogin")
     fun getAllInFlow() : Flow<List<SavedLogin>>
 
+    @Query("Select * from SavedLogin Limit 1")
+    suspend fun getAll2() : SavedLogin
+
 }
