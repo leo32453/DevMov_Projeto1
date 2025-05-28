@@ -23,9 +23,14 @@
       "sugested": "O Caminho dos Reis, O nome do vento",
       "offerings": [
         {
-          "userId": 2,
+          "book": "O caminho dos reis",
           "book_state": "Conservado",
-          "book": "O caminho dos reis"
+          "userId": 2
+        },
+        {
+          "book": "Vinland Saga 2",
+          "book_state": "Conservado",
+          "userId": 2
         }
       ],
       "id": "9e87"
@@ -57,54 +62,127 @@
       "id": "f1b3"
     },
     {
-      "id": "26e9",
-      "book_name": "Teste ",
-      "book_state": "Teste",
+      "id": "fe3f",
+      "book_name": "Shorefall",
+      "book_state": "Novo",
       "exchange_id": 3,
       "offerings": [],
-      "searching_for": "Teste",
+      "searching_for": "",
       "solicitor_id": 2,
-      "sugested": "Teste"
+      "sugested": ""
     },
     {
-      "id": "e187",
-      "book_name": "Testando final",
-      "book_state": "Seminovo",
-      "exchange_id": 4,
-      "offerings": [],
-      "searching_for": "Mistério, Ficção científica",
+      "id": "b69f",
+      "exchange_id": 5302,
       "solicitor_id": 1,
-      "sugested": "Duna"
-    },
-    {
-      "id": "f18b",
-      "book_name": "Skyward",
-      "book_state": "Novo",
-      "exchange_id": 5,
-      "offerings": [],
-      "searching_for": "Fantasia, Terror",
-      "solicitor_id": 1,
-      "sugested": "Gideon, a nona"
-    },
-    {
-      "id": "35a5",
-      "book_name": "Vinland Saga",
-      "book_state": "Seminovo",
-      "exchange_id": 6,
-      "offerings": [],
-      "searching_for": "Fantasia, Ficção científica",
-      "solicitor_id": 1,
-      "sugested": "Berserk"
-    },
-    {
-      "id": "a36a",
-      "book_name": "Fogo e Sangue",
+      "book_name": "Livro 1",
       "book_state": "Conservado",
-      "exchange_id": 7,
-      "offerings": [],
-      "searching_for": "Mistério, Romance",
+      "searching_for": "Fantasia",
+      "sugested": "Livro 2",
+      "offerings": []
+    },
+    {
+      "id": "4f9b",
+      "exchange_id": 59425,
       "solicitor_id": 1,
-      "sugested": "A culpa e das estrelas"
+      "book_name": "Livro 1",
+      "book_state": "Conservado",
+      "searching_for": "Fantasia",
+      "sugested": "Livro 2",
+      "offerings": [
+        {
+          "userId": 999,
+          "book": "Livro Novo",
+          "book_state": "Usado"
+        }
+      ]
+    },
+    {
+      "id": "8766",
+      "exchange_id": 17252,
+      "solicitor_id": 1,
+      "book_name": "Livro 1",
+      "book_state": "Conservado",
+      "searching_for": "Fantasia",
+      "sugested": "Livro 2",
+      "offerings": [
+        {
+          "userId": 999,
+          "book": "Livro Novo",
+          "book_state": "Usado"
+        }
+      ]
+    },
+    {
+      "id": "d39b",
+      "exchange_id": 10000,
+      "solicitor_id": 1,
+      "book_name": "Livro 1",
+      "book_state": "Conservado",
+      "searching_for": "Fantasia",
+      "sugested": "Livro 2",
+      "offerings": [
+        {
+          "userId": 999,
+          "book": "Livro Novo",
+          "book_state": "Usado"
+        },
+        {
+          "userId": 999,
+          "book": "Livro Novo",
+          "book_state": "Usado"
+        },
+        {
+          "userId": 999,
+          "book": "Livro Novo",
+          "book_state": "Usado"
+        },
+        {
+          "userId": 999,
+          "book": "Livro Novo",
+          "book_state": "Usado"
+        }
+      ]
+    },
+    {
+      "id": "930f",
+      "exchange_id": 10000,
+      "solicitor_id": 1,
+      "book_name": "Livro 1",
+      "book_state": "Conservado",
+      "searching_for": "Fantasia",
+      "sugested": "Livro 2",
+      "offerings": []
+    },
+    {
+      "id": "0e7c",
+      "exchange_id": 10000,
+      "solicitor_id": 1,
+      "book_name": "Livro 1",
+      "book_state": "Conservado",
+      "searching_for": "Fantasia",
+      "sugested": "Livro 2",
+      "offerings": []
+    },
+    {
+      "id": "152b",
+      "exchange_id": 8228,
+      "solicitor_id": 1,
+      "book_name": "Livro 1",
+      "book_state": "Conservado",
+      "searching_for": "Fantasia",
+      "sugested": "Livro 2",
+      "offerings": []
+    },
+    {
+      "id": "5c08",
+      "exchange_id": 10000,
+      "solicitor_id": 1,
+      "book_name": "Livro 1",
+      "book_state": "Conservado",
+      "searching_for": "Fantasia",
+      "sugested": "Livro 2",
+      "offerings": []
     }
   ]
 }
