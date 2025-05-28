@@ -1,4 +1,4 @@
-package com.example.projeto1.components
+package com.example.projeto1.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

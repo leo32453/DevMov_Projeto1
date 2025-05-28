@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.projeto1.ui.screen.LoginScreen
 import kotlinx.coroutines.launch
 import com.example.projeto1.ui.theme.Projeto1Theme
 
@@ -51,19 +52,21 @@ fun App(
             startDestination = startingRoute
         ) {
             composable("login") {
-                LoginScreen(onSuccessfulLogin = {
-                    // here
-                    navController.navigate("main") {
-                        popUpTo(navController.graph.startDestinationId) {
-                            inclusive = true
+                LoginScreen(
+                    onSuccessfulLogin = {
+                        // here
+                        navController.navigate("main") {
+                            popUpTo(navController.graph.startDestinationId) {
+                                inclusive = true
+                            }
                         }
-                    }
-                },
-                navigateUp = {
-                    scope.launch {
-                        activity?.finish()
-                    }
-                },)
+                    },
+                    navigateUp = {
+                        scope.launch {
+                            activity?.finish()
+                        }
+                    },
+                )
             }
             composable("main") {
                 MainScreen(

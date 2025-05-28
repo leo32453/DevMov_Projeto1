@@ -10,8 +10,7 @@ import kotlinx.coroutines.launch
 class TrocasViewModel(
     private val repository: TrocasRepository = TrocasRepository()
 ) : ViewModel() {
-
-    // Correção: usando delegate com getValue e setValue do Compose
+    
     var trocas by mutableStateOf<List<ExchangeData>>(emptyList())
         private set
 
