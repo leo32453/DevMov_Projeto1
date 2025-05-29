@@ -3,7 +3,6 @@ package com.example.projeto1
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -13,7 +12,9 @@ import com.example.projeto1.repository.UserRepository
 import com.example.projeto1.repository.room.SavedLogin
 import kotlinx.coroutines.launch
 
-
+/*
+    Factory: AppViewModelProvider
+ */
 class LoginViewModel (
     val savedLoginRepository: SavedLoginRepository
 ): ViewModel() {
@@ -30,47 +31,59 @@ class LoginViewModel (
 
 
     fun performLogin() {
-        Log.i("MainViewModel", "Performing Login")
+        Log.i("LoginViewModel", "Performing Login")
         usernameError = false
         passwordError = false
 
+        /*
+            username having leading and trailing whitespace removed
+            and password must be present,
+
+            if there's an error, the screen uses the resource id to
+            get the error message
+         */
         username = username.trim()
         if (username == "") {
             usernameError = true
             usernameErrorID = R.string.error_empty_field
             return
         }
-
         if (password == "") {
             passwordError = true
             passwordErrorID = R.string.error_empty_field
             return
         }
 
+        /*
+            suspend functions,
+            coroutine in a viewmodel for asynchronous  operations
+         */
         viewModelScope.launch {
             isLoading = true
-            // userRepository handles username/password check, returns status
+            // userRepository handles username/password check, returns status and user id
             val (status, id) = userRepository.login(username, password)
             isLoading = false
-            Log.i("MainViewModel", "id: $id, email: $username, status: $status")
+            Log.i("LoginViewModel", "id: $id, email: $username, status: $status")
             when(status) {
+                // success saves login info locally
                 "success" -> {
                     val login_to_save = SavedLogin(id = id, email = username)
                     savedLoginRepository.insert(login_to_save)
 
-                    Log.i("MainViewModel", "moving to main screen")
+                    Log.i("LoginViewModel", "moving to main screen")
                     isLoginSuccessful = true
                 }
                 "wrong_username_or_password" -> {
-                    Log.i("MainViewModel", "wrong username or password")
+                    Log.i("LoginViewModel", "wrong username or password")
                     usernameError = true
                     usernameErrorID = R.string.error_wrong_username_or_password
                     passwordError = true
                     passwordErrorID = R.string.error_wrong_username_or_password
                 } "failed_connection" -> {
-                Log.i("MainViewModel", "failed connection")
+                Log.i("LoginViewModel", "failed connection")
             }
                 else -> {
+                    // other error
                     usernameError = true
                     usernameErrorID = R.string.error
                 }
@@ -78,34 +91,32 @@ class LoginViewModel (
         }
     }
 
-    fun clearLogin() {
-        Log.i("MainViewModel", "login cleared")
-        username = ""
-        password = ""
-        usernameError = false
-        passwordError = false
-    }
+//    fun clearLogin() {
+//        Log.i("LoginViewModel", "login cleared")
+//        username = ""
+//        password = ""
+//        usernameError = false
+//        passwordError = false
+//    }
 
+    /*
+        not implemented yet
+     */
     fun createAccount(){
-        Log.i("MainViewModel", "Create Account Clicked")
+        Log.i("LoginViewModel", "Create Account Clicked")
     }
 
+    /*
+        function to check if theres a saved login,
+        to skip the login page
+     */
     fun useSavedLogin() {
-        var savedLogins = mutableStateListOf<SavedLogin>()
-        Log.i("MainViewModel", "init")
+        Log.i("LoginViewModel", "init")
         viewModelScope.launch {
-            savedLoginRepository.getAll().collect {
-                savedLogins.clear()
-                it.forEach {
-                        v -> savedLogins.add(v)
-                    isLoginSuccessful = true
-                    Log.i("MainViewModel", "a")}
+            val saved = savedLoginRepository.getSaved()
+            if (saved != null){
+                isLoginSuccessful = true
             }
         }
-    }
-
-    suspend fun logout(){
-        Log.i("MainViewModel", "Logout Clicked")
-        savedLoginRepository.deleteAll()
     }
 }

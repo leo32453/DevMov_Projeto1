@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.projeto1.MyTradeDetailsViewModel
-import com.example.projeto1.TradeDetailsViewModel
 import com.example.projeto1.repository.TrocasRepository
 
 class MyTradeDetailsViewModelFactory(

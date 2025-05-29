@@ -17,12 +17,6 @@ class AppApplication : Application() {
     }
 }
 
-/**
- * We want to limit the visibility of Android-related objects to ViewModels and Composable.
- *
- * So, we attach here the repositories to a GameApplication object
- *    so that we can retrieve them in the AppViewModelProvider.
- */
 class AppContainer(private val context: Context) {
     val savedLoginRepository : SavedLoginRepository by lazy {
         SavedLoginRepository(AppDatabase.getDatabase(context as Application).savedLoginDao())

@@ -1,12 +1,14 @@
 package com.example.projeto1.ui.viewmodel
 
 import MyTradesViewModel
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.projeto1.repository.SavedLoginRepository
 import com.example.projeto1.repository.TrocasRepository
 
+/*
+    Factory cria viewmodel com parametros
+ */
 class MyTradesViewModelFactory(
     private val repository: TrocasRepository,
     private val savedLoginRepository: SavedLoginRepository

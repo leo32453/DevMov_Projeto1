@@ -5,13 +5,9 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 
-/**
- * Provides Factory to create instance of ViewModel for the entire app
- */
 object AppViewModelProvider {
     val Factory = viewModelFactory {
-
-        // Initializer for MainViewModel
+        // Initializer for LoginViewModel
         initializer {
             LoginViewModel(appApplication().container.savedLoginRepository)
         }

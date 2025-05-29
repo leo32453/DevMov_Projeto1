@@ -15,6 +15,6 @@ class SavedLoginRepository(private val dao: SavedLoginDao) {
 
     suspend fun getUserId(): Long? = dao.getUserId()
 
-    suspend fun getSaved() : SavedLogin = dao.getSaved()
+    suspend fun getSaved() : SavedLogin? = dao.getSaved()
 
 }

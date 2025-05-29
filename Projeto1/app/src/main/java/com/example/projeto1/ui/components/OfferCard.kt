@@ -24,7 +24,7 @@ fun OfferCard(offered_trade: Offering, onClick: () -> Unit) {
             .fillMaxWidth()
             .padding(10.dp)
             .background(
-                color = MaterialTheme.colorScheme.primaryContainer,
+                color = MaterialTheme.colorScheme.secondaryContainer,
                 shape = RoundedCornerShape(16.dp)
             )
             .clickable { onClick() }

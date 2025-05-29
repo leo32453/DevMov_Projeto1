@@ -4,6 +4,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+/*
+    cria banco de dados utilizando o SavedLogin
+ */
 @Database(entities = [SavedLogin::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
