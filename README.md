@@ -19,4 +19,4 @@ Rodando o frontend (app) no Android Studio:
 
 ou
       "email": "joao@email.com",
-      "password": "senha123"
+      "password": "123456"
