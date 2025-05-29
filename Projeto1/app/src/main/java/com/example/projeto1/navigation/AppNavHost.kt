@@ -29,6 +29,11 @@ fun AppNavHost(
     modifier: Modifier = Modifier
 ) {
     val scope = rememberCoroutineScope()
+    val application = LocalContext.current.applicationContext as Application
+    val trocasRepository = TrocasRepository()
+    val savedLoginRepository = SavedLoginRepository(
+        AppDatabase.getDatabase(application).savedLoginDao()
+    )
     NavHost(
         navController = navController,
         startDestination = startDestination,
@@ -38,15 +43,10 @@ fun AppNavHost(
             LoginScreenWithNavigation(navController = navController)
         }
         composable(Destination.Explore.route) {
-            val application = LocalContext.current.applicationContext as Application
-            val repository = TrocasRepository()
-            val savedLoginRepository = SavedLoginRepository(
-                AppDatabase.getDatabase(application).savedLoginDao()
-            )
 
             TradesScreen(
                 application = application,
-                repository = repository,
+                repository = trocasRepository,
                 savedLoginRepository = savedLoginRepository,
                 onTrocaClick = { exchangeId ->
                     navController.navigate("trade_details/$exchangeId")
@@ -68,15 +68,21 @@ fun AppNavHost(
         composable(Destination.MyExchanges.route) {
             MyTradesScreen(
                 application = LocalContext.current.applicationContext as Application,
-                repository = TrocasRepository(),
+                trocasRepository = TrocasRepository(),
+                savedLoginRepository = savedLoginRepository,
                 onTrocaClick = { exchangeId ->
                     navController.navigate("my_trade_details/$exchangeId")
-                })
+                },
+                onLogout = {
+                    navController.navigate(Destination.Login.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
         }
         composable(Destination.Add.route) {
-            val application = LocalContext.current.applicationContext as Application
-            val repository = TrocasRepository()
-
             AddTradeScreen(application = application)
         }
 
@@ -84,14 +90,11 @@ fun AppNavHost(
             route = "trade_details/{exchangeId}",
             arguments = listOf(navArgument("exchangeId") { type = NavType.IntType })
         ) { backStackEntry ->
-            val application = LocalContext.current.applicationContext as Application
-            val repository = TrocasRepository()
-
             val exchangeId = backStackEntry.arguments?.getInt("exchangeId") ?: 0
 
             TradeDetailsScreen(
                 exchangeId = exchangeId,
-                repository = repository,
+                repository = trocasRepository,
                 onBack = { navController.popBackStack() }
             )
         }
@@ -100,14 +103,12 @@ fun AppNavHost(
             route = "my_trade_details/{exchangeId}",
             arguments = listOf(navArgument("exchangeId") { type = NavType.IntType })
         ) { backStackEntry ->
-            val application = LocalContext.current.applicationContext as Application
-            val repository = TrocasRepository()
 
             val exchangeId = backStackEntry.arguments?.getInt("exchangeId") ?: 0
 
             MyTradeDetailsScreen(
                 exchangeId = exchangeId,
-                repository = repository,
+                trocasRepository = trocasRepository,
                 onBack = { navController.popBackStack() }
             )
         }

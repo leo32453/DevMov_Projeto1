@@ -15,11 +15,9 @@ import kotlinx.coroutines.launch
 
 class MyTradeDetailsViewModel(
     application: Application,
-    private val repository: TrocasRepository,
+    private val trocasRepository: TrocasRepository,
     private val exchangeId: Int
 ) : AndroidViewModel(application) {
-
-    private val savedLoginDao = AppDatabase.getDatabase(application).savedLoginDao()
 
     var isLoading = true
     var errorMessage = ""
@@ -34,7 +32,7 @@ class MyTradeDetailsViewModel(
         isLoading = true
         viewModelScope.launch {
             try {
-                trocas = repository.getTrocaByExchangeId(exchangeId)
+                trocas = trocasRepository.getTrocaByExchangeId(exchangeId)
                 Log.i("MyTradesDetailsViewModel", "Loading trades from exchange_id ${exchangeId}")
             } catch (e: Exception) {
                 errorMessage = application.getString(R.string.error_loading_details)

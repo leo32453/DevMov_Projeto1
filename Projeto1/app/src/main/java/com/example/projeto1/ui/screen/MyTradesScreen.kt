@@ -1,12 +1,8 @@
 package com.example.projeto1.ui.screens
 
-import MinhasTrocasViewModel
-import TrocasViewModel
+import MyTradesViewModel
 import android.app.Application
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -23,19 +19,19 @@ import com.example.projeto1.R
 import com.example.projeto1.repository.SavedLoginRepository
 import com.example.projeto1.repository.TrocasRepository
 import com.example.projeto1.ui.components.TrocaCard
-import com.example.projeto1.ui.viewmodel.MinhasTrocasViewModelFactory
-import com.example.projeto1.ui.viewmodel.TrocasViewModelFactory
+import com.example.projeto1.ui.viewmodel.MyTradesViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyTradesScreen(
     application: Application,
-    repository: TrocasRepository,
+    trocasRepository: TrocasRepository,
+    savedLoginRepository: SavedLoginRepository,
     onLogout: () -> Unit = {},
     onTrocaClick: (Int) -> Unit
 ) {
-    val viewModel: MinhasTrocasViewModel = viewModel(
-        factory = MinhasTrocasViewModelFactory(application, repository)
+    val viewModel: MyTradesViewModel = viewModel(
+        factory = MyTradesViewModelFactory(application, trocasRepository, savedLoginRepository)
     )
 
     val trocas = viewModel.trocas

@@ -13,7 +13,7 @@ object AppViewModelProvider {
 
         // Initializer for MainViewModel
         initializer {
-            MainViewModel(appApplication().container.savedLoginRepository)
+            LoginViewModel(appApplication().container.savedLoginRepository)
         }
 
     }
