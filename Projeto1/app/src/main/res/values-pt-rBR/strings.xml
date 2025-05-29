@@ -24,7 +24,7 @@
     <string name="state_used">Seminovo</string>
     <string name="state_good">Conservado</string>
     <string name="state_damaged">Danificado</string>
-    <string name="label_searching">Buscando</string>
+    <string name="label_searching">Gêneros buscados</string>
     <string name="only_suggestions">Apenas as sugestões de troca</string>
     <string name="category_fantasy">Fantasia</string>
     <string name="category_scifi">Ficção científica</string>
@@ -42,13 +42,13 @@
 
     <string name="label_livro">Livro: %1$s</string>
     <string name="label_estado">Estado: %1$s</string>
-    <string name="label_buscando">Buscando: %1$s</string>
+    <string name="label_buscando">Gêneros buscados: %1$s</string>
 
     <string name="trade_detail">Detalhes da troca</string>
     <string name="voltar">Voltar</string>
     <string name="livro">Livro: %s</string>
     <string name="estado">Estado: %s</string>
-    <string name="buscando">Buscando: %s</string>
+    <string name="buscando">Gêneros buscados: %s</string>
     <string name="sugestoes">Sugestões: %s</string>
     <string name="erro_carregamento">Erro ao carregar os detalhes da troca</string>
     <string name="sua_oferta">Sua oferta</string>

@@ -50,6 +50,7 @@ class TradeDetailsViewModel(
 
     private fun loadTroca() {
         viewModelScope.launch {
+            // procura uma troca com o valor de exchange_id igual ao passado como paramtro pra criar a página
             _isLoading.value = true
             try {
                 val trocas = repository.getTrocas()
@@ -79,6 +80,8 @@ class TradeDetailsViewModel(
         viewModelScope.launch {
             _isLoading.value = true
             try {
+                // verifica se todos os dados para o envio estão ali, se der erro manda pra página em
+                // forma de toast
                 val currentTroca = _troca.value ?: run {
                     _eventFlow.emit(getApplication<Application>().getString(R.string.error_trade_details_not_loaded))
                     _isLoading.value = false
@@ -97,6 +100,7 @@ class TradeDetailsViewModel(
                     return@launch
                 }
 
+                // envia pelo repository um patch pro backend, adicionando a oferta
                 repository.addOfferToExchange(
                     exchangeId = currentTroca.exchange_id,
                     userId = userId,
@@ -104,6 +108,7 @@ class TradeDetailsViewModel(
                     bookState = _offerBookState.value
                 )
 
+                // limpa os dados da tela
                 _eventFlow.emit(getApplication<Application>().getString(R.string.offer_sent_successfully))
                 _offerBookName.value = ""
                 _offerBookState.value = bookStates.first()

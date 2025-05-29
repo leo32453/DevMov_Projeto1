@@ -38,6 +38,7 @@ fun TradesScreen(
     )
 
     val coroutineScope = rememberCoroutineScope()
+    // Chama o logout pro botão
     val logout_aux: () -> Unit = {
         coroutineScope.launch {
             viewModel.logout()
@@ -51,6 +52,7 @@ fun TradesScreen(
     var searchQuery by remember { mutableStateOf("") }
     var filteredTrocas by remember { mutableStateOf(trocas) }
 
+    // Filtra de acordo com o input de busca
     LaunchedEffect(trocas, searchQuery) {
         filteredTrocas = if (searchQuery.isBlank()) {
             trocas
@@ -68,6 +70,7 @@ fun TradesScreen(
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
                 ),
+                // Botão de logout
                 actions = {
                     IconButton(onClick = logout_aux) {
                         Icon(
@@ -91,6 +94,7 @@ fun TradesScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
+                // Input de busca
                 OutlinedTextField(
                     value = searchQuery,
                     onValueChange = { searchQuery = it },
@@ -104,10 +108,12 @@ fun TradesScreen(
             Spacer(modifier = Modifier.padding(8.dp))
 
             if (isLoading) {
+                // Estado de carregamento
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     CircularProgressIndicator()
                 }
             } else {
+                // Carrega os cards das trocas
                 filteredTrocas.forEach { troca ->
                     TrocaCard(troca = troca, onClick = { onTrocaClick(troca.exchange_id) })
                     Spacer(modifier = Modifier.height(8.dp))

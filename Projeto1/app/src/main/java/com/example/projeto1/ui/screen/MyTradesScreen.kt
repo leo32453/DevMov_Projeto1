@@ -29,7 +29,7 @@ fun MyTradesScreen(
     onTrocaClick: (Int) -> Unit
 ) {
     val viewModel: MyTradesViewModel = viewModel(
-        factory = MyTradesViewModelFactory(application, trocasRepository, savedLoginRepository)
+        factory = MyTradesViewModelFactory(trocasRepository, savedLoginRepository)
     )
 
     val trocas = viewModel.trocas

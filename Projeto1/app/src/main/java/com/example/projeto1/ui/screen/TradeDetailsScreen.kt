@@ -99,6 +99,8 @@ fun TradeDetailsScreen(
                             modifier = Modifier.align(Alignment.Center)
                         )
                     }
+
+                    // carrega os detalhes da troca se existirem
                     trocaState.value != null -> {
                         val troca = trocaState.value!!
                         Column {
@@ -142,6 +144,7 @@ fun TradeDetailsScreen(
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
 
+                    // Input do nome do livro
                     OutlinedTextField(
                         value = offerBookName.value,
                         onValueChange = { viewModel.updateOfferBookName(it) },
@@ -158,6 +161,7 @@ fun TradeDetailsScreen(
                     )
 
                     Column(Modifier.selectableGroup()) {
+                        // Seletor de radio button pro estado do livro
                         bookStates.forEach { state ->
                             Row(
                                 modifier = Modifier

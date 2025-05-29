@@ -37,6 +37,7 @@ class TrocasViewModel(
                 val todasTrocas = repository.getTrocas()
                 val userId = savedLoginDao.getUserId()
 
+                // Filtra trocas para não mostrar as que o próprio usuário solicitou
                 trocas = if (userId != null) {
                     todasTrocas.filter { it.solicitor_id.toLong() != userId }
                 } else {
