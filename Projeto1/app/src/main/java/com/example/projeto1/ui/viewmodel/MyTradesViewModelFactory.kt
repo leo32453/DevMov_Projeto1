@@ -1,21 +1,23 @@
 package com.example.projeto1.ui.viewmodel
 
-import MinhasTrocasViewModel
-import TrocasViewModel
+import MyTradesViewModel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.projeto1.repository.SavedLoginRepository
 import com.example.projeto1.repository.TrocasRepository
 
-class MinhasTrocasViewModelFactory(
+class MyTradesViewModelFactory(
     private val application: Application,
-    private val repository: TrocasRepository
+    private val repository: TrocasRepository,
+    private val savedLoginRepository: SavedLoginRepository
+
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MinhasTrocasViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(MyTradesViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MinhasTrocasViewModel(application, repository) as T
+            return MyTradesViewModel(application, repository, savedLoginRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

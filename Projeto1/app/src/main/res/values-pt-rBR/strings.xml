@@ -79,4 +79,8 @@
     <string name="nav_label_explore">Explorar</string>
     <string name="nav_label_my_exchanges">Minhas Trocas</string>
     <string name="nav_label_add">Adicionar</string>
+    <string name="my_trades">Minhas trocas</string>
+    <string name="offers">Ofertas</string>
+    <string name="no_offers_found">Nenhuma oferta encontrada</string>
+    <string name="logout">Logout</string>
 </resources>

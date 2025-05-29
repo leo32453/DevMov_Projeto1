@@ -34,4 +34,13 @@ object RetrofitInstance {
 
         retrofit.create(ExchangeApiInterface::class.java)
     }
+
+    val TestExchangeApi : ExchangeApiInterface by lazy {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(TO_TEST_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        retrofit.create(ExchangeApiInterface::class.java)
+    }
 }

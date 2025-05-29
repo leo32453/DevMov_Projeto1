@@ -25,6 +25,6 @@ class AppApplication : Application() {
  */
 class AppContainer(private val context: Context) {
     val savedLoginRepository : SavedLoginRepository by lazy {
-        SavedLoginRepository(AppDatabase.getDatabase(context).savedLoginDao())
+        SavedLoginRepository(AppDatabase.getDatabase(context as Application).savedLoginDao())
     }
 }

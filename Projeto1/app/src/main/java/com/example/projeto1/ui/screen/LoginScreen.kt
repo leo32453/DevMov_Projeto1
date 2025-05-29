@@ -36,7 +36,7 @@ import com.example.projeto1.ui.theme.Projeto1Theme
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.projeto1.AppViewModelProvider
-import com.example.projeto1.MainViewModel
+import com.example.projeto1.LoginViewModel
 import com.example.projeto1.R
 import com.example.projeto1.navigation.Destination
 
@@ -44,7 +44,7 @@ import com.example.projeto1.navigation.Destination
 fun LoginScreenWithNavigation(
     navController: NavController,
     modifier: Modifier = Modifier,
-    viewModel: MainViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: LoginViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     // Implementação do corpo da função
     LoginScreen(
@@ -68,7 +68,7 @@ fun LoginScreenWithNavigation(
 // viewModel provides functions
 fun LoginScreen(
     modifier: Modifier = Modifier,
-    viewModel: MainViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    viewModel: LoginViewModel = viewModel(factory = AppViewModelProvider.Factory),
     onSuccessfulLogin : () -> Unit = {},
     navigateUp : () -> Unit = {},)
 {

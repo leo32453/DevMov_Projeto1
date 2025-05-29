@@ -1,25 +1,30 @@
 package com.example.projeto1.repository
 
+import com.example.projeto1.repository.retrofit.ExchangeApiInterface
 import com.example.projeto1.repository.retrofit.ExchangeData
+import com.example.projeto1.repository.retrofit.LoginApiInterface
 import com.example.projeto1.repository.retrofit.Offering
 import com.example.projeto1.repository.retrofit.RetrofitInstance
 import com.example.projeto1.repository.retrofit.RetrofitInstance.ExchangeApi
 
-class TrocasRepository {
+class TrocasRepository (val useTestUrl: Boolean = false) {
+
+    private val client: ExchangeApiInterface = if (useTestUrl) RetrofitInstance.TestExchangeApi else RetrofitInstance.ExchangeApi
+
     suspend fun getTrocas(): List<ExchangeData> {
-        return RetrofitInstance.ExchangeApi.getTrocas()
+        return client.getTrocas()
     }
 
     suspend fun getMinhasTrocas(solicitor_id : String): List<ExchangeData> {
-        return RetrofitInstance.ExchangeApi.getMinhasTrocas(solicitor_id)
+        return client.getMinhasTrocas(solicitor_id)
     }
 
     suspend fun getTrocaByExchangeId(exchange_id : Int): List<ExchangeData> {
-        return RetrofitInstance.ExchangeApi.getTrocaByExchangeId(exchange_id)
+        return client.getTrocaByExchangeId(exchange_id)
     }
 
     suspend fun postTroca(troca: ExchangeData) {
-        RetrofitInstance.ExchangeApi.postTroca(troca)
+        client.postTroca(troca)
     }
 
     suspend fun addOfferToExchange(
@@ -28,7 +33,7 @@ class TrocasRepository {
         bookState: String,
         userId: Int
     ) {
-        val currentExchanges = ExchangeApi.getTrocaByExchangeId(exchangeId)
+        val currentExchanges = client.getTrocaByExchangeId(exchangeId)
 
         val currentExchange = currentExchanges.firstOrNull()
             ?: throw Exception("Troca com exchange_id $exchangeId não encontrada.")
@@ -43,7 +48,7 @@ class TrocasRepository {
         )
         val updatedOfferings = currentExchange.offerings + newOffer
 
-        val response = ExchangeApi.addOfferToExchange(
+        val response = client.addOfferToExchange(
             internalId = internalExchangeId,
             updateData = mapOf("offerings" to updatedOfferings)
         )

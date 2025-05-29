@@ -39,16 +39,17 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun MyTradeDetailsScreen(
     exchangeId: Int,
-    repository: TrocasRepository,
+    trocasRepository: TrocasRepository,
     onBack: () -> Unit
 ) {
     val context = LocalContext.current
     val application = context.applicationContext as Application
 
     val viewModel: MyTradeDetailsViewModel = viewModel(
-        factory = MyTradeDetailsViewModelFactory(application, repository, exchangeId)
+        factory = MyTradeDetailsViewModelFactory(application, trocasRepository, exchangeId)
     )
 
+    // troca com o id correto
     val trocas = viewModel.trocas
     var troca = trocas.find { troca -> (troca.exchange_id == viewModel.id) }
 
