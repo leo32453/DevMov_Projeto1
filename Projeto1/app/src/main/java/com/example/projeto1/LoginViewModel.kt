@@ -30,7 +30,7 @@ class LoginViewModel (
 
 
     fun performLogin() {
-        Log.i("LoginViewModel", "Performing Login")
+        Log.i("MainViewModel", "Performing Login")
         usernameError = false
         passwordError = false
 
@@ -52,23 +52,23 @@ class LoginViewModel (
             // userRepository handles username/password check, returns status
             val (status, id) = userRepository.login(username, password)
             isLoading = false
-            Log.i("LoginViewModel", "id: $id, email: $username, status: $status")
+            Log.i("MainViewModel", "id: $id, email: $username, status: $status")
             when(status) {
                 "success" -> {
                     val login_to_save = SavedLogin(id = id, email = username)
                     savedLoginRepository.insert(login_to_save)
 
-                    Log.i("LoginViewModel", "moving to main screen")
+                    Log.i("MainViewModel", "moving to main screen")
                     isLoginSuccessful = true
                 }
                 "wrong_username_or_password" -> {
-                    Log.i("LoginViewModel", "wrong username or password")
+                    Log.i("MainViewModel", "wrong username or password")
                     usernameError = true
                     usernameErrorID = R.string.error_wrong_username_or_password
                     passwordError = true
                     passwordErrorID = R.string.error_wrong_username_or_password
                 } "failed_connection" -> {
-                Log.i("LoginViewModel", "failed connection")
+                Log.i("MainViewModel", "failed connection")
             }
                 else -> {
                     usernameError = true
@@ -79,7 +79,7 @@ class LoginViewModel (
     }
 
     fun clearLogin() {
-        Log.i("LoginViewModel", "login cleared")
+        Log.i("MainViewModel", "login cleared")
         username = ""
         password = ""
         usernameError = false
@@ -87,25 +87,25 @@ class LoginViewModel (
     }
 
     fun createAccount(){
-        Log.i("LoginViewModel", "Create Account Clicked")
+        Log.i("MainViewModel", "Create Account Clicked")
     }
 
     fun useSavedLogin() {
         var savedLogins = mutableStateListOf<SavedLogin>()
-        Log.i("LoginViewModel", "init")
+        Log.i("MainViewModel", "init")
         viewModelScope.launch {
             savedLoginRepository.getAll().collect {
                 savedLogins.clear()
                 it.forEach {
                         v -> savedLogins.add(v)
                     isLoginSuccessful = true
-                    Log.i("LoginViewModel", "a")}
+                    Log.i("MainViewModel", "a")}
             }
         }
     }
 
     suspend fun logout(){
-        Log.i("LoginViewModel", "Logout Clicked")
+        Log.i("MainViewModel", "Logout Clicked")
         savedLoginRepository.deleteAll()
     }
 }
