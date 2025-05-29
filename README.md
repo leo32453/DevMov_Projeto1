@@ -12,7 +12,7 @@ Rodando o backend simulado (json server):
 - De o comando no terminal: npm start
 
 Rodando o frontend (app) no Android Studio:
-- Rode o app na IDE em um emulador para garantir a conexão com o backend
+- Acesse o projeto pela pasta /Projeto1 no Android Studio, para rodar o aplicativo em um emulador e garantir a conexão com o backend
 - Faca o login com um dos usuários abaixo (pelo escopo do projeto, os usuários estão fixos, sem novos cadastros)
       "email": "maria@email.com",
       "password": "123456"
