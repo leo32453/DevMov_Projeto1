@@ -2,7 +2,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.projeto1.repository.SavedLoginRepository
@@ -15,6 +14,9 @@ class MyTradesViewModel(
     val savedLoginRepository: SavedLoginRepository
 ) : ViewModel() {
 
+    /*
+        Cria lista de trocas vazia que será preenchida
+     */
     var trocas by mutableStateOf<List<ExchangeData>>(emptyList())
 
     var isLoading = true
@@ -27,6 +29,10 @@ class MyTradesViewModel(
         isLoading = true
         viewModelScope.launch {
             try {
+                /*
+                    Carrega id do usuário armazenado localmente
+                    e as trocas relacionadas a ele
+                 */
                 val saved = savedLoginRepository.getUserId()
                 trocas = trocasRepository.getMinhasTrocas(saved.toString())
                 Log.i("MyTradesViewModel", "Loading trades from id ${saved}")
@@ -36,5 +42,13 @@ class MyTradesViewModel(
                 isLoading = false
             }
         }
+    }
+
+    /*
+        logout limpa o login salvo localmente
+     */
+    suspend fun logout(){
+        Log.i("MyTradesViewModel", "Logout Clicked")
+        savedLoginRepository.deleteAll()
     }
 }

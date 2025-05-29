@@ -14,12 +14,11 @@ import com.example.projeto1.repository.SavedLoginRepository
 import com.example.projeto1.repository.TrocasRepository
 import com.example.projeto1.repository.room.AppDatabase
 import com.example.projeto1.ui.screen.AddTradeScreen
-import com.example.projeto1.ui.screen.LoginScreen
 import com.example.projeto1.ui.screen.LoginScreenWithNavigation
-import com.example.projeto1.ui.screens.MyTradeDetailsScreen
+import com.example.projeto1.ui.screen.MyTradeDetailsScreen
 import com.example.projeto1.ui.screens.TradeDetailsScreen
 import com.example.projeto1.ui.screens.TradesScreen
-import com.example.projeto1.ui.screens.MyTradesScreen
+import com.example.projeto1.ui.screen.MyTradesScreen
 import kotlinx.coroutines.launch
 
 @Composable
@@ -67,7 +66,6 @@ fun AppNavHost(
         }
         composable(Destination.MyExchanges.route) {
             MyTradesScreen(
-                application = LocalContext.current.applicationContext as Application,
                 trocasRepository = TrocasRepository(),
                 savedLoginRepository = savedLoginRepository,
                 onTrocaClick = { exchangeId ->

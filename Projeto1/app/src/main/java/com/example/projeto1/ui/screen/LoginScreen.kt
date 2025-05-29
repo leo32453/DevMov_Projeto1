@@ -10,12 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -56,10 +52,6 @@ fun LoginScreenWithNavigation(
                 // Limpa a pilha de navegação
                 popUpTo("login") { inclusive = true }
             }
-        },
-        navigateUp = {
-            // Volta para a tela anterior
-            navController.popBackStack()
         }
     )
 }
@@ -69,9 +61,13 @@ fun LoginScreenWithNavigation(
 fun LoginScreen(
     modifier: Modifier = Modifier,
     viewModel: LoginViewModel = viewModel(factory = AppViewModelProvider.Factory),
-    onSuccessfulLogin : () -> Unit = {},
-    navigateUp : () -> Unit = {},)
+    onSuccessfulLogin : () -> Unit = {},)
 {
+    /*
+        Tries to use saved login
+        launches coroutine when the page is made
+            the argument says what item its watching, Unit makes it run once
+     */
     LaunchedEffect(Unit){
         viewModel.useSavedLogin()
     }
@@ -81,15 +77,7 @@ fun LoginScreen(
                 title = { Text(stringResource(R.string.app_title)) },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
-                ),
-                navigationIcon = {
-                    IconButton(onClick = navigateUp) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "back button"
-                        )
-                    }
-                }
+                )
             )
         },
         modifier = Modifier.fillMaxSize()
@@ -114,10 +102,15 @@ fun LoginScreen(
                     text = stringResource(R.string.login_label)
                 )
                 Spacer(modifier = Modifier.padding(10.dp))
+                /*
+                    viewModel.username - salva o nome de usuario no viewmodel
+                    viewModel.password - salva a senha no viewmodel
+
+                    se tem erro, mostra utilizando o id fornecido pelo viewmodel
+                 */
                 // Username Field
                 OutlinedTextField(
                     value = viewModel.username,
-                    isError = viewModel.usernameError,
                     supportingText = {
                         if (viewModel.usernameError) {
                             Text(
@@ -135,7 +128,6 @@ fun LoginScreen(
                 // Password Field
                 OutlinedTextField(
                     value = viewModel.password,
-                    isError = viewModel.passwordError,
                     supportingText = {
                         if (viewModel.passwordError) {
                             Text(
@@ -156,9 +148,7 @@ fun LoginScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Button(onClick = viewModel::clearLogin) {
-                        Text(stringResource(R.string.clear_login_label))
-                    }
+                    // perform login
                     Button(onClick = viewModel::performLogin) {
                         Text(stringResource(R.string.confirm_login_label))
                     }
@@ -169,6 +159,8 @@ fun LoginScreen(
                 }
             }
         }
+
+        // if login was successful, go to the next page with onSuccessfulLogin()
         if (viewModel.isLoginSuccessful) {
             onSuccessfulLogin()
             Log.i("LoginScreen", "onSuccessfulLogin()")

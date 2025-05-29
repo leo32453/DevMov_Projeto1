@@ -1,11 +1,11 @@
-package com.example.projeto1.ui.screens
+package com.example.projeto1.ui.screen
 
 import MyTradesViewModel
-import android.app.Application
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -13,17 +13,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.projeto1.AppViewModelProvider
 import com.example.projeto1.R
 import com.example.projeto1.repository.SavedLoginRepository
 import com.example.projeto1.repository.TrocasRepository
 import com.example.projeto1.ui.components.TrocaCard
 import com.example.projeto1.ui.viewmodel.MyTradesViewModelFactory
+import androidx.compose.material.icons.automirrored.filled.Logout
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyTradesScreen(
-    application: Application,
     trocasRepository: TrocasRepository,
     savedLoginRepository: SavedLoginRepository,
     onLogout: () -> Unit = {},
@@ -33,12 +33,24 @@ fun MyTradesScreen(
         factory = MyTradesViewModelFactory(trocasRepository, savedLoginRepository)
     )
 
+    val coroutineScope = rememberCoroutineScope()
+    // Chama o logout pro botão
+    val logout_aux: () -> Unit = {
+        coroutineScope.launch {
+            viewModel.logout()
+            onLogout()
+        }
+    }
+
     val trocas = viewModel.trocas
     val isLoading = viewModel.isLoading
 
     var searchQuery by remember { mutableStateOf("") }
     var filteredTrocas by remember { mutableStateOf(trocas) }
 
+    /*
+        Filtra pela barra de pesquisa
+     */
     LaunchedEffect(trocas, searchQuery) {
         filteredTrocas = if (searchQuery.isBlank()) {
             trocas
@@ -55,7 +67,16 @@ fun MyTradesScreen(
                 title = { Text(stringResource(R.string.my_trades)) },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                ),
+                // Botão de logout
+                actions = {
+                    IconButton(onClick = logout_aux) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.Logout,
+                            contentDescription = stringResource(R.string.logout)
+                        )
+                    }
+                }
             )
         },
         modifier = Modifier.fillMaxSize()
