@@ -68,6 +68,11 @@
           "book": "It: A coisa",
           "book_state": "Conservado",
           "userId": 1
+        },
+        {
+          "book": "Warbreaker",
+          "book_state": "Conservado",
+          "userId": 1
         }
       ],
       "id": "f1b3"
@@ -101,6 +106,16 @@
       "searching_for": "Apenas as sugestões de troca",
       "solicitor_id": 3,
       "sugested": "Abc"
+    },
+    {
+      "id": "ff76",
+      "book_name": "Warbreaker",
+      "book_state": "Seminovo",
+      "exchange_id": 6,
+      "offerings": [],
+      "searching_for": "Fantasia",
+      "solicitor_id": 1,
+      "sugested": "Senhor dos Aneis"
     }
   ]
 }
